@@ -1,60 +1,52 @@
-import react from '../../assets/icons/react.svg'
-import python from '../../assets/icons/python.svg'
+import react from '../../assets/iconLang/react.svg'
+import bootstrap from '../../assets/iconLang/bootstrap.svg'
+import html from '../../assets/iconLang/html.svg';
+import css from '../../assets/iconLang/css.svg';
+import git from '../../assets/iconLang/git.svg';
+import visualCode from '../../assets/iconLang/visual-studio-code.svg';
+import js from '../../assets/iconLang/js.svg';
 
 const languages = [
     {
-        icon: python,
-        name: 'Python',
-        level: '45'
-    },
-    {
-        icon: react,
-        name: 'Java',
-        level: '60'
-    },
-    {
-        icon: react,
+        icon: html,
         name: 'HTML',
-        level: '80'
+        level: '70'
+    },
+    {
+        icon: css,
+        name: 'CSS',
+        level: '70'
+    },
+    {
+        icon: js,
+        name: 'JS/ES6',
+        level: '65'
+    },
+    {
+        icon: bootstrap,
+        name: 'Bootstrap',
+        level: '65'
     },
     {
         icon: react,
-        name: 'react',
+        name: 'ReactJS / React-Native',
         level: '60'
     },
-    {
-        icon: react,
-        name: 'Django',
-        level: '80'
-    },
-    {
-        icon: react,
-        name: 'Bootstrap',
-        level: '80'
-    }
+
 ]
 
 const tools = [
     {
-        icon: react,
-        name: 'Figma',
+        icon: visualCode,
+        name: 'Visual Studio Code',
         level: '85'
     },
     {
-        icon: react,
-        name: 'Photoshop',
+        icon: git,
+        name: 'git',
         level: '45'
     },
-    {
-        icon: react,
-        name: 'Illustrator',
-        level: '60'
-    },
-    {
-        icon: react,
-        name: 'Framer',
-        level: '45'
-    },
+
 
 ]
 

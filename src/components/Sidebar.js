@@ -1,7 +1,7 @@
 import React from 'react'
 
 import facebook from '../assets/icons/facebook.svg'
-import instagram from '../assets/icons/instagram.svg'
+
 import github from '../assets/icons/github.svg'
 import pin from '../assets/icons/pin.svg'
 import mightycoder from '../assets/mightycoder.svg'
