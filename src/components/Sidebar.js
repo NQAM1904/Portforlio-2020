@@ -1,12 +1,11 @@
+import { motion } from 'framer-motion'
 import React from 'react'
 
 import facebook from '../assets/icons/facebook.svg'
-
 import github from '../assets/icons/github.svg'
 import pin from '../assets/icons/pin.svg'
 import mightycoder from '../assets/mightycoder.svg'
 import resume from '../assets/Nghiem-Quoc-Anh-Minh-resume.pdf'
-import { motion } from 'framer-motion'
 
 const Sidebar = () => {
     const handleEmailMe = () => {
