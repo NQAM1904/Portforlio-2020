@@ -6,6 +6,7 @@ import ProjectCard from './ProjectCard';
 
 const Projects = () => {
     const [projects, setProjects] = useState(data_projects)
+    const [loading, setloading] = useState(true)
     const [category, setCategory] = useState([]);
     const [data, setData] = useState([]);
     const [active, setActive] = useState('All')
@@ -15,8 +16,10 @@ const Projects = () => {
         function getCategory() {
             return axios.get(`${API_URL}/category`)
                 .then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
+
                     setCategory(res.data);
+                    setloading(false)
                 })
                 .catch(err => {
                     console.log(err)
@@ -29,7 +32,7 @@ const Projects = () => {
         function getProject() {
             return axios.get(`${API_URL}/projects`)
                 .then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     setData(res.data);
                 })
                 .catch(err => {
@@ -41,9 +44,26 @@ const Projects = () => {
 
 
 
-    const handleFilterCategory = (name) => {
-        const new_array = data_projects.filter(project => project.category.includes(name))
-        setProjects(new_array)
+    const handleFilterCategory = (name = 'All') => {
+        //const new_array = data_projects.filter(project => project.category.includes(name))
+
+        if (loading && !data?.project) {
+            return <></>
+        } else {
+            if (name === 'All') {
+                return data.project.map((project, idx) => <ProjectCard key={project.name} project={project} />)
+            } else {
+
+                return data.project.filter(i => i.category.map(category => category.nameCategory).includes(name)).map((project, idx) => <ProjectCard key={project.name} project={project} />)
+            }
+        }
+
+        //setProjects(new_array)
+        //setActive(name)
+
+    }
+    const handleOnclickFilterCategory = name => {
+
         setActive(name)
     }
 
@@ -75,18 +95,18 @@ const Projects = () => {
         >
 
             <div className="projects__navbar">
-                <div className={active === 'All' && 'projects__navbar-active'} onClick={() => { setProjects(data_projects); setActive("All"); console.log(active) }}>All</div>
-                <div className={active === 'react.js' && 'projects__navbar-active'} onClick={() => handleFilterCategory('react.js')}>React</div>
-                <div className={active === 'mongoDB' && 'projects__navbar-active'} onClick={() => handleFilterCategory('mongoDB')}>MongoDB</div>
-                <div className={active === 'node.js' && 'projects__navbar-active'} onClick={() => handleFilterCategory('node.js')}>Node</div>
-                <div className={active === 'vanilla' && 'projects__navbar-active'} onClick={() => handleFilterCategory('vanilla')}>Vanilla</div>
+                <div className={active === 'All' && 'projects__navbar-active'} onClick={() => { setData(data); setActive("All"); }}>All</div>
+                {
+                    category.map(cate =>
+                        <div className={active === cate.nameCategory && 'projects__navbar-active'} onClick={() => handleOnclickFilterCategory(cate.nameCategory)}>{cate.nameCategory}</div>)
+                }
+
+
             </div>
 
             <div className="row">
-                {
-                    projects.map(project =>
-                        <ProjectCard key={project.name} project={project} />)
-                }
+
+                {!loading && data.project && handleFilterCategory(active)}
             </div>
         </motion.div>
 
