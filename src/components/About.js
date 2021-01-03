@@ -25,14 +25,15 @@ const About = () => {
     }
     return (
         <motion.div className="about"
-
             variants={about_variants}
             initial="hidden"
             animate="visible"
             exit="exit"
         >
             <h6 className="about__intro">
-                I describe myself as someone who's persistant, a quick learner and loves problem solving by using simple and scalable solutions.
+                I describe myself as someone who's persistant, a quick learner and loves problem solving by using simple and scalable solutions.<br />
+                If you give me the chance, I will agree first and find the way later.<br />
+                There's nothing you can't do, unless I don't do it.
             </h6>
             <div className="container about__container">
                 <h6 className="about__heading">What I offer</h6>

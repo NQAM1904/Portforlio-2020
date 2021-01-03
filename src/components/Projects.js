@@ -1,12 +1,44 @@
 import { motion } from 'framer-motion'
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import data_projects from './data/projects_data'
 import ProjectCard from './ProjectCard';
 
 const Projects = () => {
     const [projects, setProjects] = useState(data_projects)
+    const [category, setCategory] = useState([]);
+    const [data, setData] = useState([]);
     const [active, setActive] = useState('All')
+    const API_URL = 'https://mern-stack-admin.herokuapp.com/api';
+
+    useEffect(() => {
+        function getCategory() {
+            return axios.get(`${API_URL}/category`)
+                .then(res => {
+                    console.log(res.data)
+                    setCategory(res.data);
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+        }
+        getCategory()
+    }, [])
+
+    useEffect(() => {
+        function getProject() {
+            return axios.get(`${API_URL}/projects`)
+                .then(res => {
+                    console.log(res.data)
+                    setData(res.data);
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+        }
+        getProject()
+    }, [])
+
 
 
     const handleFilterCategory = (name) => {
@@ -43,15 +75,7 @@ const Projects = () => {
         >
 
             <div className="projects__navbar">
-                <div className={active === 'All' && 'projects__navbar-active'} onClick={
-                    () => {
-                        setProjects(data_projects)
-                        setActive("All")
-
-                    }
-
-
-                }>All</div>
+                <div className={active === 'All' && 'projects__navbar-active'} onClick={() => { setProjects(data_projects); setActive("All"); console.log(active) }}>All</div>
                 <div className={active === 'react.js' && 'projects__navbar-active'} onClick={() => handleFilterCategory('react.js')}>React</div>
                 <div className={active === 'mongoDB' && 'projects__navbar-active'} onClick={() => handleFilterCategory('mongoDB')}>MongoDB</div>
                 <div className={active === 'node.js' && 'projects__navbar-active'} onClick={() => handleFilterCategory('node.js')}>Node</div>
@@ -59,13 +83,13 @@ const Projects = () => {
             </div>
 
             <div className="row">
-
                 {
                     projects.map(project =>
                         <ProjectCard key={project.name} project={project} />)
                 }
             </div>
         </motion.div>
+
     );
 };
 

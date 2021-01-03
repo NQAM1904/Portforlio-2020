@@ -8,7 +8,6 @@ const Navbar = () => {
 
     useEffect(() => {
         let currentURL = window.location.href
-        console.log(currentURL);
         if (currentURL.endsWith('/'))
             setActive('About');
         else if (currentURL.endsWith('/projects'))
